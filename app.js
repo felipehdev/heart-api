@@ -117,6 +117,7 @@ app.get("/userId/:userId", (req, res) => {
   });
 
 //POST
+
 //create post
 app.post("/post", (req, res) => {
   const post = Post.create(req.body, (err) => {
