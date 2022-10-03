@@ -8,7 +8,7 @@ const uploadImg = require('./middlewares/uploadImg')
 
 
 dotenv.config();
-const MONGO_CNSTRING = process.env.MONGO_CNSTRING;
+const mongoPass = process.env.MONGO_PASS;
 
 
 //importa o model
@@ -41,7 +41,7 @@ const port = process.env.PORT || 3000;
 //configuraçao do mongoose
 
 mongoose
-  .connect(`mongodb+srv://felipr:${MONGO_CNSTRING}@clusterheart.l0j851f.mongodb.net/?retryWrites=true&w=majority`)
+  .connect(`mongodb+srv://felipr:${mongoPass}@clusterheart.l0j851f.mongodb.net/?retryWrites=true&w=majority`)
   .then(() => {
     console.log(`Conectado com sucesso ao MongoDB`);
   })
