@@ -2,7 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+const uploadImg = require('./middlewares/uploadImg')
 
 //instalar o muter? e multer s3?
 
@@ -132,6 +134,25 @@ app.post("/post", (req, res) => {
     });
   });
 });
+
+//upload de imagem
+app.post ("/uploadImg" , uploadImg.single('img'), async (req, res) => {
+  if (req.file) {
+    return res.json({
+      error: false,
+      menssage: "Upload de imagem com sucesso"
+    });
+  }
+
+  return res.status(400).json({
+    error: true,
+    menssage: "Erro ao fazer upload da imagem"
+  });
+});
+
+app.get ("/uploadImg", (req, res) => {
+  
+})
 
 //get post
 app.get("/post", (req, res) => {
