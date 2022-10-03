@@ -20,6 +20,9 @@ const User = mongoose.model("User");
 require("./models/Post");
 const Post = mongoose.model("Post");
 
+require("./models/Img");
+const Img = mongoose.model("Img");
+
 const app = express();
 
 app.use(express.json());
@@ -27,7 +30,7 @@ app.use(express.json());
 //midleware cors
 // MODIFICAR QUEM PODE FAZER REQUISIÇAO ANTES DE LANÇAR
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://felipr.com/");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     app.use(cors());
     next();
@@ -134,26 +137,7 @@ app.post("/post", (req, res) => {
     });
   });
 });
-
-//upload de imagem
-app.post ("/uploadImg" , uploadImg.single('img'), async (req, res) => {
-  if (req.file) {
-    return res.json({
-      error: false,
-      menssage: "Upload de imagem com sucesso"
-    });
-  }
-
-  return res.status(400).json({
-    error: true,
-    menssage: "Erro ao fazer upload da imagem"
-  });
-});
-
-app.get ("/uploadImg", (req, res) => {
-  
-})
-
+ 
 //get post
 app.get("/post", (req, res) => {
   Post.find({})
@@ -217,6 +201,59 @@ app.delete("/post/:postId", (req, res) => {
     });
   });
 });
+
+//Imgs
+
+//create Img Schema
+
+app.post("/img", (req, res) => {
+  const img = Img.create(req.body, (err) => {
+    if (err)
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao criar img",
+      });
+    return res.status(200).json({
+      error: false,
+      message: "Img criado com sucesso",
+    });
+  });
+});
+
+
+
+//upload de imagem
+app.post ("/uploadImg" , uploadImg.single('img'), async (req, res) => {
+  console.log(req.body, req.file);
+  
+  if (req.file) {
+
+    await Img.create({imgId: req.body.imgId, src: req.file.filename, text: req.body.text})
+    return res.json({
+      error: false,      
+      menssage: "Upload de imagem com sucesso"
+    });
+  }
+
+  return res.status(400).json({
+    error: true,
+    menssage: "Erro ao fazer upload da imagem"
+  });
+});
+
+//get uploadImgs
+app.get('/uploadImg', (req, res) => {
+  Img.find({})
+    .then((img) => {
+      return res.json(img);
+    })
+    .catch((err) => {
+      return res.status(400).json({
+        error: true,
+        message: "Erro ao retornar img",
+      });
+    });
+})
 
 //LISTEN TO PORT
 
