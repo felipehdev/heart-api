@@ -28,7 +28,7 @@ app.use(express.json());
 //midleware cors
 // MODIFICAR QUEM PODE FAZER REQUISIÇAO ANTES DE LANÇAR
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://felipr.com/");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     app.use(cors());
     next();
