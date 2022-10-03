@@ -6,8 +6,6 @@ const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const uploadImg = require('./middlewares/uploadImg')
 
-//instalar o muter? e multer s3?
-
 
 dotenv.config();
 const MONGO_CNSTRING = process.env.MONGO_CNSTRING;
