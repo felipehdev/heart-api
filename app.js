@@ -41,7 +41,11 @@ const port = process.env.PORT || 3000;
 //configuraçao do mongoose
 
 mongoose
-  .connect(`mongodb+srv://felipr:${mongoPass}@clusterheart.l0j851f.mongodb.net/?retryWrites=true&w=majority`)
+  .connect(`mongodb+srv://felipr:${mongoPass}@clusterheart.l0j851f.mongodb.net/?retryWrites=true&w=majority`,
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  })
   .then(() => {
     console.log(`Conectado com sucesso ao MongoDB`);
   })
