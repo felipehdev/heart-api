@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 const dotenv = require("dotenv");
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const uploadImg = require('./middlewares/uploadImg')
+
 
 
 dotenv.config();
@@ -24,6 +26,9 @@ const Img = mongoose.model("Img");
 const app = express();
 
 app.use(express.json());
+
+// use path que permite que os arquivos possam ser requisitados e visualizado atravez do caminho files, que substitui o src
+app.use('/files', express.static(path.resolve(__dirname, "src")));
 
 //midleware cors
 // MODIFICAR QUEM PODE FAZER REQUISIÇAO ANTES DE LANÇAR
