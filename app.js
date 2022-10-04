@@ -38,10 +38,10 @@ app.use((req, res, next) => {
 const port = process.env.PORT || 3000;
 
 
-//configuraçao do mongoose
+//configuraçao do mongoose ${mongoPass}
 
 mongoose
-  .connect(`mongodb+srv://felipr:${mongoPass}@clusterheart.l0j851f.mongodb.net/?retryWrites=true&w=majority`,
+  .connect(`mongodb+srv://felipr:chocola01@clusterheart.l0j851f.mongodb.net/?retryWrites=true&w=majority`,
   {
     useUnifiedTopology: true,
     useNewUrlParser: true
