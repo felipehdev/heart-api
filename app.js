@@ -37,9 +37,7 @@ app.use((req, res, next) => {
     next();
 });
 
-
 const port = process.env.PORT || 3000;
-
 
 //configuraçao do mongoose ${mongoPass}
 
@@ -224,8 +222,6 @@ app.post("/img", (req, res) => {
     });
   });
 });
-
-
 
 //upload de imagem
 app.post ("/uploadImg" , uploadImg.single('img'), async (req, res) => {
