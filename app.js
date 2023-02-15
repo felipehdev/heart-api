@@ -7,11 +7,8 @@ const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const uploadImg = require('./middlewares/uploadImg')
 
-
-
 dotenv.config();
 const mongoPass = process.env.MONGO_PASS;
-
 
 //importa o model
 require("./models/User");
@@ -31,9 +28,10 @@ app.use(express.json());
 app.use('/files', express.static(path.resolve(__dirname, "src")));
 
 //midleware cors
-// MODIFICAR QUEM PODE FAZER REQUISIÇAO ANTES DE LANÇAR
+
+//https://cartoes.felipr.com, 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://cartoes.felipr.com");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     app.use(cors());
     next();

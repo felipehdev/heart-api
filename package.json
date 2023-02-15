@@ -2,9 +2,9 @@
   "name": "api-heart",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index"
+    "start": "node app"
   },
   "author": "",
   "license": "ISC",
